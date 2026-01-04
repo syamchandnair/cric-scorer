@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cricket Scorer</title>
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-N062FT70PB"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-N062FT70PB");
+    </script>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap");
+    </style>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="app-container">
+      <header>
+        <h1>Cricket Scorer</h1>
+      </header>
+
+      <div class="settings">
+        <label for="max-overs">Overs:</label>
+        <input
+          type="number"
+          id="max-overs"
+          value="8"
+          min="1"
+          onchange="updateMaxOvers()"
+        />
+        <label for="max-players" style="margin-left: 10px">Players:</label>
+        <input
+          type="number"
+          id="max-players"
+          value="11"
+          min="2"
+          onchange="updateMaxPlayers()"
+        />
+        <label for="target-score" style="margin-left: 10px">Target:</label>
+        <input
+          type="number"
+          id="target-score"
+          placeholder="0"
+          min="0"
+          onchange="updateTarget()"
+        />
+      </div>
+
+      <div class="scoreboard">
+        <div class="main-score">
+          <span id="score">0</span>/<span id="wickets">0</span>
+        </div>
+        <div class="overs-display">Overs: <span id="overs">0.0</span></div>
+        <div class="crr-display">CRR: <span id="crr">0.00</span></div>
+        <div class="rrr-display" id="rrr-container" style="display: none">
+          Target: <span id="target-display">0</span> | RRR:
+          <span id="rrr">0.00</span>
+        </div>
+      </div>
+
+      <div class="current-over-container">
+        <div id="current-over-balls" class="balls-row"></div>
+      </div>
+
+      <div class="controls">
+        <div class="keypad">
+          <button class="run-btn" onclick="addRuns(0)">0</button>
+          <button class="run-btn" onclick="addRuns(1)">1</button>
+          <button class="run-btn" onclick="addRuns(2)">2</button>
+          <button class="run-btn" onclick="addRuns(3)">3</button>
+          <button class="run-btn" onclick="addRuns(4)">4</button>
+          <button class="run-btn" onclick="addRuns(6)">6</button>
+        </div>
+        <div class="extras-pad">
+          <button class="extra-btn" onclick="addExtra('wd')">WD</button>
+          <button class="extra-btn" onclick="addExtra('nb')">NB</button>
+          <button class="wicket-btn" onclick="addWicket()">W</button>
+        </div>
+        <div class="action-pad">
+          <button class="undo-btn" onclick="undoLastAction()">Undo</button>
+          <button class="scorecard-btn" onclick="toggleScorecard()">
+            Scorecard
+          </button>
+          <button class="next-innings-btn" onclick="startNextInnings()">
+            Next Innings
+          </button>
+          <button class="new-match-btn" onclick="startNewMatch()">
+            New Match
+          </button>
+        </div>
+      </div>
+
+      <div id="scorecard-modal" class="modal hidden">
+        <div class="history-container">
+          <span class="close-btn" onclick="toggleScorecard()">&times;</span>
+          <h3>Match History</h3>
+          <table class="history-table">
+            <thead>
+              <tr>
+                <th>Over</th>
+                <th>Maiden</th>
+                <th>Runs</th>
+                <th>Wkt</th>
+              </tr>
+            </thead>
+            <tbody id="history-body"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
